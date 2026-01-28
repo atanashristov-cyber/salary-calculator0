@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Калкулатор заплата + бонус</title>
+  <title>Калкулатор: заплата + бонус</title>
+
   <style>
     :root{
       --brand:#ff7a00;
@@ -16,167 +17,176 @@
       --radius:16px;
     }
     *{ box-sizing:border-box; }
+
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background: radial-gradient(900px 500px at 10% -10%, rgba(255,122,0,.18), transparent 60%), var(--bg);
       padding:24px 12px;
-      color: var(--text);
+      color:var(--text);
     }
+
     .card{
-      max-width: 760px;
+      max-width:780px;
       margin:auto;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      border:1px solid var(--border);
       overflow:hidden;
     }
+
+    /* ===== HEADER ===== */
     .header{
       display:flex;
-      gap:12px;
       align-items:center;
-      padding:16px 16px;
+      gap:14px;
+      padding:16px;
       border-bottom:1px solid var(--border);
     }
     .logo{
-      width:44px;height:44px;border-radius:12px;
-      background: linear-gradient(180deg,#ff8a26,var(--brand));
-      display:flex;align-items:center;justify-content:center;
+      width:48px;
+      height:48px;
+      border-radius:12px;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
       flex:0 0 auto;
     }
-    .logo svg{ width:26px;height:26px; }
-    h1{ margin:0; font-size:18px; }
-    .sub{ margin-top:2px; font-size:12px; color: var(--muted); }
+    .logo img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+    }
+    h1{
+      margin:0;
+      font-size:18px;
+    }
+    .sub{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:2px;
+    }
 
+    /* ===== BODY ===== */
     .body{ padding:16px; }
+
     .grid{
       display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
     }
-    @media (max-width: 820px){
-      .grid{ grid-template-columns: 1fr; }
-    }
-    label{
-      display:block;
-      font-weight: 800;
-      font-size: 12px;
-      margin-bottom: 6px;
-    }
-    select, input{
-      width:100%;
-      padding:10px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      font-size: 14px;
-      outline: none;
-      background:#fff;
-    }
-    input:focus, select:focus{
-      border-color: rgba(255,122,0,.55);
-      box-shadow: 0 0 0 4px rgba(255,122,0,.15);
-    }
-    .btn{
-      margin-top: 14px;
-      width: 100%;
-      padding: 12px 14px;
-      border: none;
-      border-radius: 14px;
-      background: linear-gradient(180deg,#ff8a26,var(--brand));
-      color: #fff;
-      font-weight: 900;
-      font-size: 15px;
-      cursor:pointer;
-    }
-    .note{
-      margin-top: 10px;
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.35;
+    @media(max-width:900px){
+      .grid{ grid-template-columns:1fr; }
     }
 
+    label{
+      display:block;
+      font-size:12px;
+      font-weight:800;
+      margin-bottom:6px;
+    }
+    select,input{
+      width:100%;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      font-size:14px;
+    }
+
+    .btn{
+      margin-top:14px;
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:14px;
+      background:var(--brand);
+      color:#fff;
+      font-weight:900;
+      font-size:15px;
+      cursor:pointer;
+    }
+
+    .note{
+      margin-top:10px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    /* ===== RESULTS ===== */
     .results{
-      margin-top: 16px;
+      margin-top:16px;
       display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
     }
-    @media (max-width: 820px){
-      .results{ grid-template-columns: 1fr; }
+    @media(max-width:900px){
+      .results{ grid-template-columns:1fr; }
     }
+
     .box{
-      border: 1px solid var(--border);
-      background: #f8fafc;
-      border-radius: 14px;
-      padding: 14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
     }
     .box h2{
       margin:0 0 10px 0;
-      font-size: 14px;
-      letter-spacing: .2px;
+      font-size:14px;
     }
+
     .row{
       display:flex;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: 14px;
-      margin-top: 6px;
-      align-items: baseline;
+      justify-content:space-between;
+      margin-top:6px;
+      font-size:14px;
     }
-    .muted{ color: var(--muted); }
-    .hr{
-      margin: 10px 0;
-      border-top: 1px dashed var(--border);
-    }
-    .big{
-      font-size: 18px;
-      font-weight: 1000;
-    }
+    .muted{ color:var(--muted); }
+    .big{ font-size:18px;font-weight:1000; }
+
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,122,0,.25);
-      background: rgba(255,122,0,.10);
-      color: #9a3f00;
-      font-size: 12px;
-      font-weight: 900;
-      margin-top: 6px;
+      margin-top:8px;
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(255,122,0,.12);
+      color:#9a3f00;
+      font-size:12px;
+      font-weight:900;
     }
-    .mono{ font-variant-numeric: tabular-nums; white-space: nowrap; }
+
     .netHint{
-      color: var(--muted);
-      font-size: 12px;
-      margin-left: 8px;
-      white-space: nowrap;
+      font-size:12px;
+      color:var(--muted);
+      margin-left:6px;
     }
-    .hidden{ display:none !important; }
+
+    .hidden{ display:none; }
   </style>
 </head>
 <body>
 
 <div class="card">
+
+  <!-- HEADER -->
   <div class="header">
-    <div class="logo" title="Вградено лого (без файл)">
-      <svg viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="9" fill="white"/>
-        <path d="M7 12h10" stroke="#ff7a00" stroke-width="2" stroke-linecap="round"/>
-        <path d="M12 7v10" stroke="#ff7a00" stroke-width="2" stroke-linecap="round"/>
-      </svg>
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
     </div>
     <div>
-      <h1>Калкулатор заплата</h1>
-      <div class="sub" id="subtitle">—</div>
+      <h1>Калкулатор: заплата + бонус + амортизация</h1>
+      <div class="sub" id="subtitle"></div>
     </div>
   </div>
 
   <div class="body">
+
+    <!-- INPUTS -->
     <div class="grid">
       <div>
-        <label for="contract">Договор</label>
+        <label>Договор</label>
         <select id="contract">
           <option value="8">8 часа (820€)</option>
           <option value="6">6 часа (615€)</option>
@@ -186,260 +196,117 @@
       </div>
 
       <div>
-        <label for="vehicle">Превозно средство</label>
+        <label>Превозно средство</label>
         <select id="vehicle">
-          <option value="personal_car">Лична кола</option>
-          <option value="company_car">Служебна кола</option>
-          <option value="company_bike">Личен велосипед</option>
+          <option value="personal">Лична кола</option>
+          <option value="company">Служебна кола</option>
+          <option value="bike">Служебен велосипед</option>
         </select>
       </div>
 
       <div>
-        <label for="days">Работни дни (месец)</label>
-        <input id="days" type="number" min="0" step="1" value="22" />
+        <label>Работни дни</label>
+        <input id="days" type="number" value="22">
       </div>
 
       <div>
-        <label for="eff">Ефективност X (поръчки/час)</label>
-        <input id="eff" type="number" min="0" step="0.1" value="1.8" />
+        <label>Ефективност (поръчки/час)</label>
+        <input id="eff" type="number" step="0.1" value="1.8">
       </div>
     </div>
 
-    <button class="btn" type="button" onclick="calc()">Изчисли</button>
+    <button class="btn" onclick="calc()">Изчисли</button>
 
-    <div class="note" id="noteText">—</div>
+    <div class="note" id="note"></div>
 
+    <!-- RESULTS -->
     <div class="results">
+
       <div class="box">
         <h2>Резултат за месеца</h2>
-        <div class="row"><span class="muted">Часове/ден</span><span class="mono" id="outHoursDay">—</span></div>
-        <div class="row"><span class="muted">Часове/месец</span><span class="mono" id="outHoursMonth">—</span></div>
-        <div class="row"><span class="muted">Поръчки/месец</span><span class="mono" id="outOrders">—</span></div>
-
-        <div class="row" id="kmRow"><span class="muted">Км/месец</span><span class="mono" id="outKm">—</span></div>
-
-        <div class="pill" id="tierPill">—</div>
+        <div class="row"><span class="muted">Часове/месец</span><span id="oHours"></span></div>
+        <div class="row"><span class="muted">Поръчки</span><span id="oOrders"></span></div>
+        <div class="row" id="kmRow"><span class="muted">Км</span><span id="oKm"></span></div>
+        <div class="pill" id="oTier"></div>
       </div>
 
       <div class="box">
-        <h2>Разбивка (БРУТО/НЕТO)</h2>
-
-        <div class="row">
-          <span class="muted">Базова заплата</span>
-          <span class="mono"><span id="outBaseGross">—</span><span class="netHint" id="outBaseNet">—</span></span>
-        </div>
-
-        <div class="row">
-          <span class="muted">Бонус поръчки</span>
-          <span class="mono"><span id="outBonusGross">—</span><span class="netHint" id="outBonusNet">—</span></span>
-        </div>
-
-        <div class="row" id="amortRow">
-          <span class="muted" id="amortLabel">Амортизация</span>
-          <span class="mono"><span id="outAmortGross">—</span><span class="netHint" id="outAmortNet">—</span></span>
-        </div>
-
-        <div class="hr"></div>
-
-        <div class="row"><span><b>Общо бруто</b></span><span class="mono big" id="outGross">—</span></div>
-        <div class="row"><span class="muted">Удръжка 22.4%</span><span class="mono" id="outDeduct">—</span></div>
-        <div class="row"><span><b>Общо нето</b></span><span class="mono big" id="outNet">—</span></div>
+        <h2>Заплата (бруто / нето)</h2>
+        <div class="row"><span>Базова</span><span id="bBase"></span></div>
+        <div class="row"><span>Бонус</span><span id="bBonus"></span></div>
+        <div class="row" id="amortRow"><span>Амортизация</span><span id="bAmort"></span></div>
+        <hr>
+        <div class="row"><span><b>Общо бруто</b></span><span class="big" id="bGross"></span></div>
+        <div class="row"><span class="muted">Удръжка 22.4%</span><span id="bTax"></span></div>
+        <div class="row"><span><b>Общо нето</b></span><span class="big" id="bNet"></span></div>
       </div>
 
-      <div class="box" style="grid-column: 1 / -1;">
-        <h2>Детайл: бонус по нива</h2>
-        <div class="row"><span>Base</span><span class="mono" id="dBase">—</span></div>
-        <div class="row"><span>Mid</span><span class="mono" id="dMid">—</span></div>
-        <div class="row"><span>High</span><span class="mono" id="dHigh">—</span></div>
-        <div class="row"><span>Super</span><span class="mono" id="dSuper">—</span></div>
-      </div>
     </div>
+
   </div>
 </div>
 
 <script>
-  // Базови заплати (EUR, бруто)
-  const baseSalaryByContract = { 8: 820, 6: 615, 4: 410, 2: 205 };
+const baseSalary={8:820,6:615,4:410,2:205};
+const thresholds={8:[100,200,300],6:[75,150,225],4:[50,100,150],2:[25,50,75]};
+const rates=[0.25,1,1.5,3];
+const kmPerOrder=5.5;
+const tax=0.224;
 
-  // Амортизация (EUR/км, бруто)
-  const amortPerKmPersonalCar = 0.17; // лична кола
-  const amortPerKmCompanyBike = 0.11; // личен велосипед
-  // служебна кола -> няма амортизация
+function calc(){
+  const c=+contract.value;
+  const v=vehicle.value;
+  const d=+days.value;
+  const e=+eff.value;
 
-  const kmPerOrder = 5.5; // км/поръчка (средно)
+  const hours=c*d;
+  const orders=Math.max(0,Math.round(hours*e));
+  const km=orders*kmPerOrder;
 
-  // Нето удръжка
-  const netDeductionRate = 0.224; // 22.4%
-  const netMultiplier = 1 - netDeductionRate; // 0.776
+  let amortRate=0;
+  let showAmort=true;
+  if(v==="personal") amortRate=0.17;
+  if(v==="bike") amortRate=0.11;
+  if(v==="company"){ amortRate=0; showAmort=false; }
 
-  // Бонус ставки (EUR/поръчка)
-  const rates = [
-    { name: "Base",  rate: 0.25 },
-    { name: "Mid",   rate: 1.00 },
-    { name: "High",  rate: 1.50 },
-    { name: "Super", rate: 3.00 }
-  ];
+  const [t1,t2,t3]=thresholds[c];
+  const n1=Math.min(orders,t1);
+  const n2=Math.max(0,Math.min(orders,t2)-t1);
+  const n3=Math.max(0,Math.min(orders,t3)-t2);
+  const n4=Math.max(0,orders-t3);
 
-  // Прагове по договор: [t1, t2, t3]
-  const thresholds = {
-    8: [100, 200, 300],
-    6: [75, 150, 225],
-    4: [50, 100, 150],
-    2: [25, 50, 75]
-  };
+  const bonus=n1*rates[0]+n2*rates[1]+n3*rates[2]+n4*rates[3];
+  const amort=km*amortRate;
+  const gross=baseSalary[c]+bonus+amort;
+  const net=gross*(1-tax);
 
-  function eur(x){ return x.toFixed(2) + " €"; }
-  function km(x){ return x.toFixed(1) + " км"; }
+  oHours.textContent=hours;
+  oOrders.textContent=orders;
+  oKm.textContent=km.toFixed(1)+" км";
+  kmRow.classList.toggle("hidden",!showAmort);
 
-  function calcProgressiveBonus(contractHours, orders){
-    const [t1, t2, t3] = thresholds[contractHours];
+  let tier="Base";
+  if(orders>=t3) tier="Super";
+  else if(orders>=t2) tier="High";
+  else if(orders>=t1) tier="Mid";
+  oTier.textContent="Ниво: "+tier;
 
-    const n1 = Math.min(orders, t1);
-    const n2 = Math.max(0, Math.min(orders, t2) - t1);
-    const n3 = Math.max(0, Math.min(orders, t3) - t2);
-    const n4 = Math.max(0, orders - t3);
+  bBase.innerHTML=`${baseSalary[c].toFixed(2)} € <span class="netHint">${(baseSalary[c]*(1-tax)).toFixed(2)} €</span>`;
+  bBonus.innerHTML=`${bonus.toFixed(2)} € <span class="netHint">${(bonus*(1-tax)).toFixed(2)} €</span>`;
+  amortRow.classList.toggle("hidden",!showAmort);
+  bAmort.innerHTML=`${amort.toFixed(2)} € <span class="netHint">${(amort*(1-tax)).toFixed(2)} €</span>`;
 
-    const b1 = n1 * rates[0].rate;
-    const b2 = n2 * rates[1].rate;
-    const b3 = n3 * rates[2].rate;
-    const b4 = n4 * rates[3].rate;
+  bGross.textContent=gross.toFixed(2)+" €";
+  bTax.textContent="-"+(gross*tax).toFixed(2)+" €";
+  bNet.textContent=net.toFixed(2)+" €";
 
-    const total = b1 + b2 + b3 + b4;
-
-    let tierName = "Base";
-    if (orders >= t3) tierName = "Super";
-    else if (orders >= t2) tierName = "High";
-    else if (orders >= t1) tierName = "Mid";
-
-    return { total, tierName, detail: { n1,n2,n3,n4,b1,b2,b3,b4 } };
-  }
-
-  function setGrossNet(grossElId, netElId, grossValue){
-    document.getElementById(grossElId).textContent = eur(grossValue);
-    document.getElementById(netElId).textContent = `→ нето ${eur(grossValue * netMultiplier)}`;
-  }
-
-  function vehicleConfig(vehicle){
-    if (vehicle === "personal_car"){
-      return {
-        name: "Лична кола",
-        hasAmort: true,
-        amortPerKm: amortPerKmPersonalCar
-      };
-    }
-    if (vehicle === "company_car"){
-      return {
-        name: "Служебна кола",
-        hasAmort: false,
-        amortPerKm: 0
-      };
-    }
-    // company_bike
-    return {
-      name: "Личен велосипед",
-      hasAmort: true,
-      amortPerKm: amortPerKmCompanyBike
-    };
-  }
-
-  function calc(){
-    const contract = Number(document.getElementById("contract").value);
-    const vehicle = document.getElementById("vehicle").value;
-    const days = Number(document.getElementById("days").value);
-    const eff = Number(document.getElementById("eff").value);
-
-    if (!Number.isFinite(days) || days < 0 || !Number.isFinite(eff) || eff < 0){
-      alert("Моля въведи валидни стойности (работни дни >= 0, ефективност >= 0).");
-      return;
-    }
-
-    const cfg = vehicleConfig(vehicle);
-
-    const hoursPerDay = contract;
-    const hoursMonth = hoursPerDay * days;
-
-    // Поръчки/месец – закръгляме до цяло
-    const orders = Math.round(eff * hoursMonth);
-
-    // Километри/месец
-    const kmMonth = orders * kmPerOrder;
-
-    const base = baseSalaryByContract[contract] ?? 0;
-
-    const bonusObj = calcProgressiveBonus(contract, orders);
-    const bonus = bonusObj.total;
-
-    // Амортизация
-    const amort = cfg.hasAmort ? (kmMonth * cfg.amortPerKm) : 0;
-
-    const gross = base + bonus + amort;
-    const deduction = gross * netDeductionRate;
-    const net = gross - deduction;
-
-    // Subtitle & note
-    const subtitle = `Бруто/Нето · Нето = Бруто − 22.4% · Превозно средство: ${cfg.name}` +
-      (cfg.hasAmort ? ` · Амортизация ${cfg.amortPerKm.toFixed(2)}€/км · ${kmPerOrder} км/поръчка` : ` · Без амортизация`);
-    document.getElementById("subtitle").textContent = subtitle;
-
-    document.getElementById("noteText").innerHTML =
-      `Поръчки/месец = Ефективност × (часове/ден) × (работни дни), закръгляме до цяло.<br/>` +
-      `Км/месец = Поръчки × ${kmPerOrder}. ` +
-      (cfg.hasAmort
-        ? `Амортизация = Км × ${cfg.amortPerKm.toFixed(2)}€ (бруто).`
-        : `Амортизация не се начислява за ${cfg.name.toLowerCase()}.`) +
-      `<br/>Бонусът е стъпаловиден (по нива) според договора. Нетото е с фиксирана удръжка 22.4%.`;
-
-    // Output: обеми
-    document.getElementById("outHoursDay").textContent = hoursPerDay.toString();
-    document.getElementById("outHoursMonth").textContent = hoursMonth.toString();
-    document.getElementById("outOrders").textContent = orders.toString();
-    document.getElementById("tierPill").textContent = "Ниво: " + bonusObj.tierName;
-
-    // Показване/скриване на км и амортизация при служебна кола
-    const kmRow = document.getElementById("kmRow");
-    const amortRow = document.getElementById("amortRow");
-    const amortLabel = document.getElementById("amortLabel");
-
-    if (cfg.hasAmort){
-      kmRow.classList.remove("hidden");
-      amortRow.classList.remove("hidden");
-      document.getElementById("outKm").textContent = km(kmMonth);
-      amortLabel.textContent = `Амортизация (${cfg.amortPerKm.toFixed(2)}€/км)`;
-      setGrossNet("outAmortGross", "outAmortNet", amort);
-    } else {
-      kmRow.classList.add("hidden");
-      amortRow.classList.add("hidden");
-      // все пак да няма стари стойности при смяна
-      document.getElementById("outKm").textContent = "—";
-      document.getElementById("outAmortGross").textContent = "—";
-      document.getElementById("outAmortNet").textContent = "";
-    }
-
-    // Output: редове с бруто + нето
-    setGrossNet("outBaseGross", "outBaseNet", base);
-    setGrossNet("outBonusGross", "outBonusNet", bonus);
-
-    // Output: общо
-    document.getElementById("outGross").textContent = eur(gross);
-    document.getElementById("outDeduct").textContent = "−" + eur(deduction);
-    document.getElementById("outNet").textContent = eur(net);
-
-    // Детайл бонус по нива
-    const d = bonusObj.detail;
-    document.getElementById("dBase").textContent  = `${d.n1} × ${rates[0].rate.toFixed(2)}€ = ${eur(d.b1)}`;
-    document.getElementById("dMid").textContent   = `${d.n2} × ${rates[1].rate.toFixed(2)}€ = ${eur(d.b2)}`;
-    document.getElementById("dHigh").textContent  = `${d.n3} × ${rates[2].rate.toFixed(2)}€ = ${eur(d.b3)}`;
-    document.getElementById("dSuper").textContent = `${d.n4} × ${rates[3].rate.toFixed(2)}€ = ${eur(d.b4)}`;
-  }
-
-  // Авто преизчисляване при промяна
-  ["contract","vehicle","days","eff"].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener("change", calc);
-    if (el && el.tagName === "INPUT") el.addEventListener("input", calc);
-  });
-
-  calc();
+  subtitle.textContent=v==="company"
+    ?"Служебна кола · без амортизация"
+    :v==="bike"
+      ?"Служебен велосипед · 0.11€/км"
+      :"Лична кола · 0.17€/км";
+}
+calc();
 </script>
 
 </body>
